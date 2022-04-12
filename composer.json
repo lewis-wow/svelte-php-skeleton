@@ -1,0 +1,9 @@
+{
+    "config": {
+        "vendor-dir": "public/vendor"
+    },
+    "require": {
+        "bramus/router": "1.6",
+        "vlucas/phpdotenv": "^5.4"
+    }
+}
