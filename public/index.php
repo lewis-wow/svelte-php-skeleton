@@ -1,16 +1,28 @@
 <?php
     require __DIR__ . '/vendor/autoload.php';
+
+    use Firebase\JWT\JWT;
+    use Firebase\JWT\Key;
+
+    use Medoo\Medoo;
     
     $router = new \Bramus\Router\Router();
     $router->setBasePath("/");
 
     $envFile = Dotenv\Dotenv::createArrayBacked(__DIR__)->load();
-    $env = fn($key) => $envFile[$key];
+    function env($key) {
+        global $envFile;
+        return $envFile[$key];
+    }
+
+    if(filter_var(env("DB_ENABLED"), FILTER_VALIDATE_BOOLEAN)) {
+        $database = new Medoo(require_once(__DIR__ . "/database/config.php"));
+    }
 
     $subdomains = array_slice(explode('.', $_SERVER['HTTP_HOST']), 0, -2);    
 
     //php api routes
-    $router->mount("/api", function() use($router, $env) {
+    $router->mount("/api", function() use($router) {
         header('Content-Type: application/json; charset=utf-8');
         require_once(__DIR__ . "/router/api.php");
     });

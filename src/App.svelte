@@ -8,10 +8,6 @@
 
 <main>
     <Router>
-        <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-        </nav>
         <div>
             <Route path="/about">
                 <About />

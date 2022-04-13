@@ -1,11 +1,14 @@
+#lock env file
 <Files ".env">
     Order Allow,Deny
     Deny from all
 </Files>
 
+#routing
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    #https redirect
 	# RewriteCond %{HTTPS} off
 	# RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
