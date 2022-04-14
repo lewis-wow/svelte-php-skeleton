@@ -6,6 +6,8 @@ import { terser } from 'rollup-plugin-terser';
 import scss from 'rollup-plugin-scss';
 import postcss from 'postcss';
 import autoprefixer from 'autoprefixer';
+import alias from '@rollup/plugin-alias';
+import path from 'path';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -43,6 +45,13 @@ export default {
             compilerOptions: {
                 // enable run-time checks when not in production
                 dev: !production
+            }
+        }),
+
+        // $lib alias for /src/lib folder
+        alias({
+            entries: {
+                "$lib": path.resolve(__dirname, "src/lib")
             }
         }),
 

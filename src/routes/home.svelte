@@ -1,12 +1,19 @@
 <script>
     import { post } from '../api';
     import { Link } from 'svelte-routing';
+
+    // using $lib alias for /src/lib folder
+    import Container from '$lib/container.svelte';
 </script>
 
-<h1>Home page!</h1>
+<Container>
+    <h1>Home page!</h1>
 
-<Link to="/about">About page</Link>
+    <Link to="/about">About page</Link>
 
-<button on:click="{(e) => post('/api/test').then(console.log)}"
-    >Fetch from api!</button
->
+    <button
+        on:click="{(e) =>
+            post('/api/test', { test: 'test' }).then(console.log)}"
+        >Fetch from api!</button
+    >
+</Container>
