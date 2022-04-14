@@ -1,4 +1,6 @@
 <script>
+    /** 4O4 fallback route */
+
     import Container from '$lib/container.svelte';
 </script>
 

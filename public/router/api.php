@@ -7,6 +7,7 @@
 
     require_once 'lib/bearerToken.php'; //Bearer class
 
+    /** data = POST and GET data sent from client */
     $data = json_decode(file_get_contents('php://input'), true);
     $token = new Bearer(env("JWT_KEY"));
 

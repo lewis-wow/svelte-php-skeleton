@@ -10,14 +10,14 @@ class Bearer {
     
     public function createToken($data) {
         $key = new Key($this->key);
-        $token = array(
+        $token = [
             "iss" => env("SERVER_NAME"),
             "aud" => env("SERVER_NAME"),
             "iat" => time(),
             "nbf" => time(),
             "exp" => time() + intval(env("JWT_EXPIRATION_TIME")),
             "data" => $data
-        );
+        ];
         return JWT::encode($token, $key, env("JWT_ALGO"));
     }
 

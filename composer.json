@@ -6,6 +6,7 @@
         "bramus/router": "1.6",
         "vlucas/phpdotenv": "^5.4",
         "firebase/php-jwt": "^6.1",
-        "catfan/medoo": "^2.1"
+        "catfan/medoo": "^2.1",
+        "delight-im/auth": "^8.3"
     }
 }
