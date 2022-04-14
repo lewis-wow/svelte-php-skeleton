@@ -49,9 +49,11 @@ export default {
         }),
 
         // $lib alias for /src/lib folder
+        // $routes alias for /src/routes folder
         alias({
             entries: {
-                "$lib": path.resolve(__dirname, "src/lib")
+                "$lib": path.resolve(__dirname, "src/lib"),
+                "$routes": path.resolve(__dirname, "src/routes"),
             }
         }),
 

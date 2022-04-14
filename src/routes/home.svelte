@@ -1,6 +1,6 @@
 <script>
     import { post } from '../api';
-    import { Link } from 'svelte-routing';
+    import { Link } from 'svelte-navigator';
 
     // using $lib alias for /src/lib folder
     import Container from '$lib/container.svelte';
