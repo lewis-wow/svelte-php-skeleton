@@ -29,18 +29,45 @@ async function send({ method, path, body, token, headers = [] }) {
     });
 }
 
+/**
+ * 
+ * @param {String} path 
+ * @param {String} token 
+ * @returns Promise
+ */
 export function get(path, token = null) {
     return send({ method: 'GET', path, body: null, token })
 }
 
+/**
+ * 
+ * @param {String} path 
+ * @param {String} token 
+ * @returns Promise
+ */
 export function del(path, token = null) {
     return send({ method: 'DELETE', path, body: null, token })
 }
 
+/**
+ * 
+ * @param {String} path 
+ * @param {Object} body 
+ * @param {String} token 
+ * @returns 
+ */
 export function post(path, body, token = null) {
     return send({ method: 'POST', path, body, token })
 }
 
+/**
+ * 
+ * @param {String} path 
+ * @param {Object} body 
+ * @param {String} token 
+ * @param {Array} headers 
+ * @returns 
+ */
 export function put(path, body, token = null, headers = []) {
     return send({ method: 'PUT', path, body, token, headers })
 }

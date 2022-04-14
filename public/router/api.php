@@ -53,3 +53,30 @@
             "token" => $bearerToken
         ]);
     });
+
+    $router->post("/isLoggedIn", function() use($data, $token, $database) {
+        $bearerToken = $token->getToken();
+
+        if(!$bearerToken) {
+            header('HTTP/1.0 400 Bad Request');
+            echo json_encode([
+                "status" => 400,
+                "status_text" => "no token"
+            ]);
+            exit;
+        }
+        //verify token
+        $dataFromToken = $token->verifyToken($bearerToken);
+        if(!$dataFromToken) {
+            header('HTTP/1.0 400 Bad Request');
+            echo json_encode([
+                "status" => 400,
+                "status_text" => "no token"
+            ]);
+            exit;
+        }
+
+        echo json_encode([
+            "tokenData" => $dataFromToken
+        ]);
+    });

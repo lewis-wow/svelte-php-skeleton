@@ -11,14 +11,14 @@ class Bearer {
     public function createToken($data) {
         $key = new Key($this->key);
         $token = array(
-            "iss" => "http://localhost",
-            "aud" => "http://localhost",
+            "iss" => env("SERVER_NAME"),
+            "aud" => env("SERVER_NAME"),
             "iat" => time(),
             "nbf" => time(),
-            "exp" => time() + 3600,
+            "exp" => time() + intval(env("JWT_EXPIRATION_TIME")),
             "data" => $data
         );
-        return JWT::encode($token, $key, "RS256");
+        return JWT::encode($token, $key, env("JWT_ALGO"));
     }
 
     public function getToken() {
@@ -30,6 +30,18 @@ class Bearer {
             }
         }
         return null;
+    }
+
+    public function validateToken($jwt) {
+        $token = JWT::decode($jwt, env("JWT_KEY"), env("JWT_ALGO"));
+        $now = new DateTimeImmutable();
+        $serverName = env("SERVER_NAME");
+
+        if ($token->iss !== $serverName || $token->nbf > $now->getTimestamp() || $token->exp < $now->getTimestamp()) {
+            return null;
+        }
+
+        return $token->data;
     }
 
     private function getAuthorizationHeader() {

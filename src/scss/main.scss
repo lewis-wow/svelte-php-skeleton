@@ -1,13 +1,17 @@
+/** charset utf-8 for better compatibility */
 @charset "utf-8";
 
+/** import normalization styles */
 @import "normalize.scss";
 
+/** every element should have box-sizing: border-box; */
 *,
 *:before,
 *:after {
     box-sizing: border-box;
 }
 
+/** remove the default padding and margin from html and body element */
 html,
 body {
     margin: 0;

@@ -1,4 +1,4 @@
-#lock env file
+#lock env file from fetch
 <Files ".env">
     Order Allow,Deny
     Deny from all
