@@ -1,20 +1,13 @@
 <script>
-    import { useNavigate, useLocation } from 'svelte-navigator';
+    import Redirect from './redirect.svelte';
 
     export let fallback;
     export let allow;
-
-    const navigate = useNavigate();
-    const location = useLocation();
-
-    $: if (!allow) {
-        navigate(fallback, {
-            state: { from: $location.pathname },
-            replace: true,
-        });
-    }
+    export let location;
 </script>
 
 {#if allow}
     <slot />
+{:else}
+    <Redirect to="{fallback}" state="{{ from: location.pathname }}" />
 {/if}

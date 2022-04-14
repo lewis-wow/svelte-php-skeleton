@@ -4,27 +4,15 @@
 
 <style>
     .container {
-        padding-right: 15px;
-        padding-left: 15px;
-        margin-right: auto;
+        max-width: 90%;
         margin-left: auto;
+        margin-right: auto;
     }
 
-    @media (min-width: 768px) {
+    /* A media query for a large screen */
+    @media (min-width: 1170px) {
         .container {
-            width: 750px;
-        }
-    }
-
-    @media (min-width: 992px) {
-        .container {
-            width: 970px;
-        }
-    }
-
-    @media (min-width: 1200px) {
-        .container {
-            width: 1170px;
+            max-width: 1170px;
         }
     }
 </style>

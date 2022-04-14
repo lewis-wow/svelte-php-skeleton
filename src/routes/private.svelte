@@ -1,5 +1,5 @@
 <script>
-    import { Link } from 'svelte-navigator';
+    import { Link } from 'svelte-routing';
 
     import Container from '$lib/container.svelte';
 </script>

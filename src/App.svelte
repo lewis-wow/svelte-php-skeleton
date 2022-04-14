@@ -3,22 +3,26 @@
 
     import './scss/main.scss'; //global scss for each page
 
-    import { Router, Route } from 'svelte-navigator';
+    import { Router, Route } from 'svelte-routing';
     import ProtectedRoute from '$lib/protectedRoute/index.svelte';
+
+    /** import fallback routes */
+    import Page404 from './routes/404.svelte';
+
+    /** import stores */
+    import user from './stores/user';
 
     /** import every route from /src/routes */
     import Home from './routes/home.svelte';
     import About from './routes/about.svelte';
     import PrivateRoute from './routes/private.svelte';
 
+    /** url given from server if using ssr */
     export let url = '';
-
-    /** should be edited as loggedIn for example */
-    let allowProtectedRoute = false;
 </script>
 
-<main>
-    <Router url="{url}" basepath="/" primary="{true}">
+<div>
+    <Router url="{url}" basepath="/">
         <div>
             <Route path="/">
                 <Home />
@@ -31,14 +35,14 @@
             <ProtectedRoute
                 path="/protected"
                 fallback="/"
-                allow="{allowProtectedRoute}"
+                allow="{$user.loggedIn}"
             >
                 <PrivateRoute />
             </ProtectedRoute>
 
             <Route path="/*">
-                <!-- 404 path -->
+                <Page404 />
             </Route>
         </div>
     </Router>
-</main>
+</div>
