@@ -8,6 +8,7 @@ import postcss from 'postcss';
 import autoprefixer from 'autoprefixer';
 import alias from '@rollup/plugin-alias';
 import path from 'path';
+import sveltePreprocess from 'svelte-preprocess';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -33,6 +34,7 @@ function serve() {
 }
 
 export default {
+    preprocess: sveltePreprocess(),
     input: 'src/main.js',
     output: {
         sourcemap: true,
