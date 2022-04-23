@@ -34,7 +34,6 @@ function serve() {
 }
 
 export default {
-    preprocess: sveltePreprocess(),
     input: 'src/main.js',
     output: {
         sourcemap: true,
@@ -47,7 +46,8 @@ export default {
             compilerOptions: {
                 // enable run-time checks when not in production
                 dev: !production
-            }
+            },
+            preprocess: sveltePreprocess(),
         }),
 
         // $lib alias for /src/lib folder
@@ -60,9 +60,12 @@ export default {
         }),
 
         scss({
-            processor: () => postcss([autoprefixer()]),
+            processor: () => postcss([
+                autoprefixer()
+            ]),
             output: 'public/build/bundle.css',
             outputStyle: production ? 'compressed' : null,
+            include: ['/**/*.css', '/**/*.scss', '/**/*.sass'],
         }),
 
         // If you have external dependencies installed from

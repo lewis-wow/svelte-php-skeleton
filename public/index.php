@@ -2,7 +2,7 @@
     require __DIR__ . '/vendor/autoload.php';
 
     /** force https function module */
-    $forceHttps = require __DIR . '/public/lib/https.php';
+    $forceHttps = require __DIR__ . '/lib/https.php';
 
     use Firebase\JWT\JWT;
     use Firebase\JWT\Key;
