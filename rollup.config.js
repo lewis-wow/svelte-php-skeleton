@@ -9,6 +9,7 @@ import autoprefixer from 'autoprefixer';
 import alias from '@rollup/plugin-alias';
 import path from 'path';
 import sveltePreprocess from 'svelte-preprocess';
+import purgecss from '@fullhuman/postcss-purgecss';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -61,7 +62,13 @@ export default {
 
         scss({
             processor: () => postcss([
-                autoprefixer()
+                production && autoprefixer(),
+                production && purgecss({
+                    content: ['./**/**/*.html', './**/**/*.svelte'],
+                    css: ['public/build/bundle.css'],
+                    whitelistPatterns: [/svelte-/],
+                    defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
+                }),
             ]),
             output: 'public/build/bundle.css',
             outputStyle: production ? 'compressed' : null,
