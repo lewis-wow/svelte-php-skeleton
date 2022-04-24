@@ -1,0 +1,12 @@
+{
+    "name": "App Name",
+    "short_name": "Short Name",
+    "theme_color": "#2196f3",
+    "background_color": "#2196f3",
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "scope": "/",
+    "start_url": "/",
+    "description": "App Description",
+    "icons": []
+}

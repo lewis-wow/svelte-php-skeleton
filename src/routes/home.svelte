@@ -4,6 +4,8 @@
 
     // using $lib alias for /src/lib folder
     import Container from '$lib/container.svelte';
+
+    import Offline from '$lib/offline/index.svelte';
 </script>
 
 <Container>
@@ -16,4 +18,9 @@
             post('/api/test', { test: 'test' }).then(console.log)}"
         >Fetch from api!</button
     >
+
+    <Offline on:update="{console.log}">
+        <span slot="online">online</span>
+        <span slot="offline">offline</span>
+    </Offline>
 </Container>

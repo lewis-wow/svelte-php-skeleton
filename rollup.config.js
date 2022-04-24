@@ -10,6 +10,7 @@ import alias from '@rollup/plugin-alias';
 import path from 'path';
 import sveltePreprocess from 'svelte-preprocess';
 import purgecss from '@fullhuman/postcss-purgecss';
+import typescript from '@rollup/plugin-typescript';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -85,6 +86,9 @@ export default {
             dedupe: ['svelte']
         }),
         commonjs(),
+
+        //typescript support
+        typescript(),
 
         // In dev mode, call `npm run start` once
         // the bundle has been generated
