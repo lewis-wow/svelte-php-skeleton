@@ -22,7 +22,7 @@ module.exports = ({ env }) => {
 
             // purge unused css
             production && purgecss({
-                content: ['./**/**/*.html', './**/**/*.svelte'],
+                content: ['./public/*.html', '.src/**/*.{svelte|html|js}'],
                 css: ['public/build/bundle.css'],
                 whitelistPatterns: [/svelte-/],
                 defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
