@@ -1,4 +1,4 @@
-/** charset utf-8 for better compatibility */
+/** charset utf-8 */
 @charset "utf-8";
 
 /** import normalization styles */
@@ -16,5 +16,13 @@ html,
 body {
     margin: 0;
     padding: 0;
-    color: var(--brand-1);
+}
+
+/** using postcss custom-media */
+@media screen and (--xl-viewport) {
+
+    html,
+    body {
+        font-size: 1.6rem;
+    }
 }

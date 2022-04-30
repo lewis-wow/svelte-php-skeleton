@@ -1,17 +1,24 @@
+// main plugins
 import svelte from 'rollup-plugin-svelte';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
-import scss from 'rollup-plugin-scss';
-import postcss from 'postcss';
-import autoprefixer from 'autoprefixer';
-import alias from '@rollup/plugin-alias';
 import path from 'path';
 import sveltePreprocess from 'svelte-preprocess';
-import purgecss from '@fullhuman/postcss-purgecss';
+
+// path aliases
+import alias from '@rollup/plugin-alias';
+
+// typescript
 import typescript from '@rollup/plugin-typescript';
 
+// styles
+import scss from 'rollup-plugin-scss';
+import postcss from 'postcss';
+import postcssrc from 'postcss-load-config';
+
+// production flag (true = production)
 const production = !process.env.ROLLUP_WATCH;
 
 function serve() {
@@ -44,36 +51,48 @@ export default {
         file: 'public/build/bundle.js'
     },
     plugins: [
+
+        // svelte preprocessing (typescript, scss, etc)
         svelte({
             compilerOptions: {
                 // enable run-time checks when not in production
                 dev: !production
             },
-            preprocess: sveltePreprocess(),
+            ...(production && { emitCss: false }),
+            preprocess: sveltePreprocess({
+                scss: {
+                    includePaths: ['src/scss'],
+                    processor: css => {
+                        return postcss(postcssrc({ config: path.resolve(__dirname, 'postcss.config.js') }).plugins).process(css).css;
+                    }
+                },
+                postcss: true,
+            }),
         }),
 
-        // $lib alias for /src/lib folder
-        // $routes alias for /src/routes folder
+        // aliases for paths
         alias({
             entries: {
                 "$lib": path.resolve(__dirname, "src/lib"),
                 "$routes": path.resolve(__dirname, "src/routes"),
+                "$stores": path.resolve(__dirname, "src/stores"),
+                "$scss": path.resolve(__dirname, "src/scss"),
             }
         }),
 
+        // scss styles
         scss({
-            processor: () => postcss([
-                production && autoprefixer(),
-                production && purgecss({
-                    content: ['./**/**/*.html', './**/**/*.svelte'],
-                    css: ['public/build/bundle.css'],
-                    whitelistPatterns: [/svelte-/],
-                    defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
-                }),
-            ]),
+            processor: async () => {
+                // compile the code with PostCSS by using the config at `postcss.config.js`
+                const { plugins, options } = await postcssrc({
+                    env: production ? 'production' : 'development',
+                });
+                return postcss(plugins);
+            },
             output: 'public/build/bundle.css',
             outputStyle: production ? 'compressed' : null,
             include: ['/**/*.css', '/**/*.scss', '/**/*.sass'],
+            sourceMap: true,
         }),
 
         // If you have external dependencies installed from

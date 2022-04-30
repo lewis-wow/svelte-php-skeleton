@@ -17,7 +17,7 @@
     import About from './routes/about.svelte';
     import PrivateRoute from './routes/private.svelte';
 
-    /** url given from server if using ssr */
+    /** url given from server if using ssr, if you are not using ssr, keep it empty */
     export let url = '';
 </script>
 
