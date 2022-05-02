@@ -54,7 +54,7 @@
     }
 
     /** get all subdomains */
-    $subdomains = array_slice(explode('.', $_SERVER['HTTP_HOST']), 0, -2);    
+    $subdomains = array_slice(explode('.', $_SERVER['HTTP_HOST']), 0, -2);
 
     /** api routes */
     $router->mount("/api", function() use($router, $database, $subdomains) {
@@ -81,7 +81,7 @@
         header('Content-Type: text/html; charset=' . env("CHARSET"));
 
         /** always use app.html and Svelte client side router */
-        require_once(__DIR__ . '/app.html');
+        require_once(__DIR__ . '/index.html');
     });
 
     /** run router -> run whole application */

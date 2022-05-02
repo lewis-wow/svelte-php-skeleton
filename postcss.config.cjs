@@ -15,15 +15,15 @@ module.exports = ({ env }) => {
             }),
 
             // nested css
-            postcssNested,
+            postcssNested(),
 
             // autoprefixer
             production && autoprefixer(),
 
             // purge unused css
             production && purgecss({
-                content: ['./public/*.html', '.src/**/*.{svelte|html|js}'],
-                css: ['public/build/bundle.css'],
+                content: ['./dist/*.html', '.src/**/*.{svelte|html|js}'],
+                //css: ['public/build/bundle.css'],
                 whitelistPatterns: [/svelte-/],
                 defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
             }),

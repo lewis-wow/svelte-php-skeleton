@@ -30,9 +30,9 @@ async function send({ method, path, body, token, headers = [] }) {
 }
 
 /**
- * 
- * @param {String} path 
- * @param {String} token 
+ *
+ * @param {String} path
+ * @param {String} token
  * @returns Promise
  */
 export function get(path, token = null) {
@@ -40,9 +40,9 @@ export function get(path, token = null) {
 }
 
 /**
- * 
- * @param {String} path 
- * @param {String} token 
+ *
+ * @param {String} path
+ * @param {String} token
  * @returns Promise
  */
 export function del(path, token = null) {
@@ -50,23 +50,23 @@ export function del(path, token = null) {
 }
 
 /**
- * 
- * @param {String} path 
- * @param {Object} body 
- * @param {String} token 
- * @returns 
+ *
+ * @param {String} path
+ * @param {Object} body
+ * @param {String} token
+ * @returns
  */
 export function post(path, body, token = null) {
     return send({ method: 'POST', path, body, token })
 }
 
 /**
- * 
- * @param {String} path 
- * @param {Object} body 
- * @param {String} token 
- * @param {Array} headers 
- * @returns 
+ *
+ * @param {String} path
+ * @param {Object} body
+ * @param {String} token
+ * @param {Array} headers
+ * @returns
  */
 export function put(path, body, token = null, headers = []) {
     return send({ method: 'PUT', path, body, token, headers })
